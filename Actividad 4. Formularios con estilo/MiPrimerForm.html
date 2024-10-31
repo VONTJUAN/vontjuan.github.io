@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Contacto</title>
+    <link rel="stylesheet" href="estilo.css"> <!-- Vincula el archivo CSS externo -->
+
+    <script>
+        //Función que muestra una alerta con los datos ingresados en el formulario
+        function mostrarAlerta(event) {
+            event.preventDefault(); //Previene el envío del formulario
+
+            //Obtener los valores de cada campo del formulario
+            const nombre = document.getElementById('nombre').value;   //Valor del campo nombre
+            const correo = document.getElementById('correo').value;   //Valor del campo correo
+            const mensaje = document.getElementById('mensaje').value; // Valor del campo mensaje
+            const envioEmail = document.getElementById('envioEmail').value; //Valor de la opción de respuesta por email
+            const tipoUsuario = document.querySelector('input[name="tipoUsuario"]:checked').value; //Valor del tipo de usuario seleccionado
+
+            //Crear el cuerpo del mensaje a mostrar en la alerta
+            const body = `Nombre: ${nombre}\nCorreo: ${correo}\nMensaje: ${mensaje}\nRespuesta por email: ${envioEmail}\nTipo de Usuario: ${tipoUsuario}`;
+            
+            //Muestra la alerta con el mensaje de confirmación y datos ingresados
+            alert(`El mensaje ha sido enviado correctamente:\n\n${body}`);
+        }
+    </script>
+</head>
+<body>
+
+    <!-- Formulario de contacto que ejecuta la función mostrarAlerta al enviarse -->
+    <form id="contactForm" action="juanzornoza094@gmail.com" method="post" enctype="text/plain" onsubmit="mostrarAlerta(event)">
+        <h1>Formulario de Contacto</h1> <!-- Título del formulario -->
+        <p>Formulario de prueba. No ingreses información personal ni contraseñas.</p> <!-- Aviso para el usuario -->
+
+        <!-- Campo de entrada para el nombre del usuario -->
+        <p>Nombre: <input type="text" name="nombre" id="nombre" required></p>
+        
+        <!-- Campo de entrada para el correo electrónico del usuario -->
+        <p>Correo: <input type="email" name="correo" id="correo" required></p>
+        
+        <!-- Campo de texto para que el usuario ingrese su mensaje -->
+        <p>Mensaje:<br><textarea name="mensaje" id="mensaje" required></textarea></p>
+        
+        <!-- Menú desplegable para seleccionar si se quiere recibir respuesta por email -->
+        <p>Respuesta por email:
+            <select name="envioEmail" id="envioEmail">
+                <option value="si">Sí</option> <!-- Opción de recibir respuesta por email -->
+                <option value="no">No</option> <!-- Opción de no recibir respuesta por email -->
+            </select>
+        </p>
+
+        <!-- Opciones de tipo de usuario, seleccionable solo una (radio buttons) -->
+        <p>Identificación:</p>
+        <label><input type="radio" name="tipoUsuario" value="Alumno" checked> Alumno</label>
+        <label><input type="radio" name="tipoUsuario" value="Profesor"> Profesor</label>
+        <label><input type="radio" name="tipoUsuario" value="Externo"> Usuario Externo</label>
+
+        <!-- Botón para enviar el formulario -->
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+</html>
